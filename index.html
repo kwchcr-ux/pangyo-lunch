@@ -459,9 +459,11 @@
   .footer {
     margin: 4px auto 10px;
     font-family: 'Tahoma', sans-serif;
-    font-size: 10px;
-    color: #808080;
+    font-size: 11px;
+    color: #ffffff;
     text-align: center;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #000;
   }
 </style>
 </head>
@@ -470,7 +472,7 @@
 <div class="window">
   <div class="window-inner">
     <div class="title-bar">
-      <span>오늘점심_뭐먹지.exe</span>
+      <span>콘마팀_점심룰렛.exe</span>
       <div class="title-bar-buttons">
         <span>_</span>
         <span>□</span>
@@ -560,6 +562,7 @@
 
 <script>
 const RESTAURANTS = [
+  { name: "구내식당", category: "지하 2층 🏢", weight: 238 },
   { name: "앞구정김치찌개", category: "김치찌개" },
   { name: "북청집", category: "제육볶음" },
   { name: "오봉집 유스페이스점", category: "닭볶음/보쌈" },
@@ -669,6 +672,19 @@ let currentAngle = 0;
 let history = [];
 const n = RESTAURANTS.length;
 
+// weight 기반 arc 계산 (구내식당 70%)
+const TOTAL_WEIGHT = RESTAURANTS.reduce((s, r) => s + (r.weight || 1), 0);
+const SLICES = []; // 각 슬라이스의 [startAngle, endAngle] offset (0부터)
+{
+  let acc = 0;
+  for (let i = 0; i < n; i++) {
+    const w = RESTAURANTS[i].weight || 1;
+    const arcSize = (w / TOTAL_WEIGHT) * 2 * Math.PI;
+    SLICES.push({ start: acc, end: acc + arcSize, size: arcSize });
+    acc += arcSize;
+  }
+}
+
 document.getElementById("countDisplay").textContent = n;
 
 const COLORS = [
@@ -685,33 +701,40 @@ function drawWheel() {
   const cx = canvas.width / 2;
   const cy = canvas.height / 2;
   const r = cx - 10;
-  const arc = (2 * Math.PI) / n;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < n; i++) {
-    const startAngle = currentAngle + i * arc;
-    const endAngle = startAngle + arc;
+    const slice = SLICES[i];
+    const startAngle = currentAngle + slice.start;
+    const endAngle = currentAngle + slice.end;
 
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.arc(cx, cy, r, startAngle, endAngle);
     ctx.closePath();
-    ctx.fillStyle = COLORS[i % COLORS.length];
+    // 구내식당은 특별한 색(핑크)으로 강조
+    ctx.fillStyle = (RESTAURANTS[i].weight || 1) > 1 ? "#ff3366" : COLORS[i % COLORS.length];
     ctx.fill();
     ctx.strokeStyle = "#000";
     ctx.lineWidth = 1;
     ctx.stroke();
 
+    // 라벨 — 슬라이스가 너무 작으면 스킵
+    if (slice.size < 0.05) continue;
+
     ctx.save();
     ctx.translate(cx, cy);
-    ctx.rotate(startAngle + arc / 2);
+    ctx.rotate(startAngle + slice.size / 2);
     ctx.fillStyle = "#000";
-    ctx.font = "bold 8px 'Malgun Gothic', sans-serif";
+    // 구내식당은 큰 폰트
+    ctx.font = (RESTAURANTS[i].weight || 1) > 1
+      ? "bold 22px 'Do Hyeon', 'Malgun Gothic', sans-serif"
+      : "bold 8px 'Malgun Gothic', sans-serif";
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
     ctx.strokeStyle = "#fff";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = (RESTAURANTS[i].weight || 1) > 1 ? 4 : 2;
 
     const label = RESTAURANTS[i].name.length > 8
       ? RESTAURANTS[i].name.slice(0, 7) + ".."
@@ -724,10 +747,12 @@ function drawWheel() {
 }
 
 function getWinnerIndex() {
-  const arc = (2 * Math.PI) / n;
   const pointerAngle = (3 * Math.PI / 2 - currentAngle) % (2 * Math.PI);
   const normalized = ((pointerAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-  return Math.floor(normalized / arc) % n;
+  for (let i = 0; i < n; i++) {
+    if (normalized >= SLICES[i].start && normalized < SLICES[i].end) return i;
+  }
+  return n - 1;
 }
 
 function spin() {
