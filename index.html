@@ -486,15 +486,15 @@
     text-align: center;
   }
 
-  /* 어르신 포토샵 인사 텍스트 - 굵고 진한 원색 */
+  /* 어르신 포토샵 인사 텍스트 - 크기/회전/폰트/색 다 뒤죽박죽 */
   .blessing {
     font-family: 'Do Hyeon', 'Jua', 'Malgun Gothic', sans-serif;
     font-weight: 900;
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
-    margin: 8px 0;
-    letter-spacing: 0.5px;
-    line-height: 1.4;
+    margin: 10px 0;
+    line-height: 1.6;
+    letter-spacing: 1px;
   }
 
   .blessing span {
@@ -504,15 +504,41 @@
       -1px -1px 0 #fff,
       1px -1px 0 #fff,
       -1px 1px 0 #fff,
-      2px 2px 0 #000;
+      3px 3px 0 rgba(0,0,0,0.5),
+      4px 4px 6px rgba(255,255,0,0.6);
+    padding: 0 1px;
   }
 
+  /* 글자별 색깔 (진하게) */
   .blessing span:nth-child(6n+1) { color: #e60000; }
   .blessing span:nth-child(6n+2) { color: #ff6600; }
   .blessing span:nth-child(6n+3) { color: #009900; }
   .blessing span:nth-child(6n+4) { color: #0066cc; }
   .blessing span:nth-child(6n+5) { color: #9900cc; }
   .blessing span:nth-child(6n+6) { color: #cc0066; }
+
+  /* 글자별 크기 들쭉날쭉 */
+  .blessing span:nth-child(4n+1) { font-size: 22px; }
+  .blessing span:nth-child(4n+2) { font-size: 16px; }
+  .blessing span:nth-child(4n+3) { font-size: 26px; }
+  .blessing span:nth-child(4n+4) { font-size: 18px; }
+
+  /* 글자별 회전 */
+  .blessing span:nth-child(5n+1) { transform: rotate(-8deg) translateY(-2px); }
+  .blessing span:nth-child(5n+2) { transform: rotate(6deg) translateY(1px); }
+  .blessing span:nth-child(5n+3) { transform: rotate(-4deg) translateY(-1px); }
+  .blessing span:nth-child(5n+4) { transform: rotate(10deg); }
+  .blessing span:nth-child(5n+5) { transform: rotate(-2deg) translateY(2px); }
+
+  /* 일부 이탤릭 */
+  .blessing span:nth-child(3n+2) { font-style: italic; }
+
+  /* 일부 밑줄 */
+  .blessing span:nth-child(7n+3) { text-decoration: underline wavy; }
+
+  /* 일부 폰트 교체 */
+  .blessing span:nth-child(8n+2) { font-family: 'Hi Melody', 'Do Hyeon', cursive; }
+  .blessing span:nth-child(8n+5) { font-family: 'Poor Story', 'Do Hyeon', cursive; font-weight: 400; }
 
   /* 반짝이 애니메이션 */
   .sparkle-bg {
