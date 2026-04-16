@@ -486,30 +486,39 @@
     text-align: center;
   }
 
-  /* 어르신 포토샵 인사 텍스트 */
+  /* 어르신 포토샵 인사 텍스트 - 글자마다 다른 색 (전형적인 어르신 스타일) */
   .blessing {
-    font-family: 'Gaegu', cursive;
+    font-family: 'Gaegu', 'Hi Melody', cursive;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     text-align: center;
-    margin: 4px 0;
-    background: linear-gradient(90deg, #ff00ff, #ffcc00, #ff0000, #00ccff, #ff00ff);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: rainbow-slide 4s linear infinite;
-    letter-spacing: 1px;
+    margin: 6px 0;
+    letter-spacing: 2px;
+    line-height: 1.4;
   }
 
   .blessing span {
     display: inline-block;
-    animation: wiggle 1s ease-in-out infinite alternate;
+    animation: wiggle 1.2s ease-in-out infinite alternate;
+    text-shadow: 1px 1px 0 #000, 2px 2px 0 rgba(0,0,0,0.3);
+    font-weight: 900;
   }
 
+  .blessing span:nth-child(7n+1) { color: #ff0066; }
+  .blessing span:nth-child(7n+2) { color: #ff6600; }
+  .blessing span:nth-child(7n+3) { color: #ffcc00; }
+  .blessing span:nth-child(7n+4) { color: #00cc00; }
+  .blessing span:nth-child(7n+5) { color: #0099ff; }
+  .blessing span:nth-child(7n+6) { color: #9933ff; }
+  .blessing span:nth-child(7n+7) { color: #ff00ff; }
+
+  .blessing span:nth-child(2n) { animation-delay: 0.3s; }
+  .blessing span:nth-child(3n) { animation-delay: 0.6s; }
+
   @keyframes wiggle {
-    from { transform: translateY(-1px) rotate(-2deg); }
-    to { transform: translateY(1px) rotate(2deg); }
+    0% { transform: translateY(-2px) rotate(-4deg) scale(1); }
+    50% { transform: translateY(0) rotate(0deg) scale(1.1); }
+    100% { transform: translateY(2px) rotate(4deg) scale(1); }
   }
 
   /* 반짝이 애니메이션 */
