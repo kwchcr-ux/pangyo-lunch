@@ -23,7 +23,7 @@
      윈도우95 프레임 - PIXEL PERFECT
      ======================================== */
   .window {
-    margin: 20px auto;
+    margin: 10px auto;
     border: 2px solid;
     border-color: #dfdfdf #000 #000 #dfdfdf;
     background: #c0c0c0;
@@ -97,7 +97,7 @@
 
   /* === 윈도우 바디 === */
   .window-body {
-    padding: 12px;
+    padding: 8px;
     background: #c0c0c0;
   }
 
@@ -106,7 +106,7 @@
     border: 2px solid;
     border-color: #808080 #fff #fff #808080;
     background: #ffffff;
-    padding: 15px;
+    padding: 10px;
   }
 
   /* ========================================
@@ -116,9 +116,9 @@
   /* 제목: 워드아트 + 그림자 떡칠 */
   h1 {
     font-family: 'Do Hyeon', 'Impact', sans-serif;
-    font-size: 2.6rem;
+    font-size: 2rem;
     text-align: center;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
     background: linear-gradient(180deg, #ff0000 0%, #ff6600 30%, #ffcc00 50%, #ff6600 70%, #ff0000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -130,15 +130,15 @@
   /* 부제: 다른 폰트 + 다른 색 */
   .subtitle {
     font-family: 'Hi Melody', cursive;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: #ff00ff;
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   .subtitle .star {
     color: #ffcc00;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     animation: blink 0.7s step-end infinite;
   }
 
@@ -152,8 +152,8 @@
     text-align: center;
     font-family: 'Gaegu', cursive;
     font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
     background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0000);
     background-size: 200% 100%;
     -webkit-background-clip: text;
@@ -171,12 +171,12 @@
   .marquee-container {
     background: #000080;
     color: #ffff00;
-    padding: 3px 0;
+    padding: 2px 0;
     font-family: 'Poor Story', cursive;
-    font-size: 14px;
+    font-size: 12px;
     overflow: hidden;
     white-space: nowrap;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     border: 1px solid #000;
   }
 
@@ -195,36 +195,36 @@
     font-family: 'Tahoma', sans-serif;
     font-size: 11px;
     color: #808080;
-    margin-bottom: 12px;
+    margin-bottom: 22px;
     text-align: center;
   }
 
   .count-badge strong {
     color: #ff0000;
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'Impact', sans-serif;
   }
 
   /* === 룰렛 === */
   .wheel-container {
     position: relative;
-    width: 400px;
-    height: 400px;
-    margin: 0 auto 12px;
+    width: 320px;
+    height: 320px;
+    margin: 0 auto 8px;
   }
 
   canvas {
     border-radius: 50%;
-    border: 5px solid #000;
-    box-shadow: 3px 3px 0px #808080;
+    border: 4px solid #000;
+    box-shadow: 2px 2px 0px #808080;
   }
 
   .pointer {
     position: absolute;
-    top: -20px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 36px;
+    font-size: 30px;
     z-index: 10;
     filter: drop-shadow(1px 1px 0px #000);
     line-height: 1;
@@ -236,8 +236,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 65px;
-    height: 65px;
+    width: 52px;
+    height: 52px;
     background: radial-gradient(circle, #ffff00 0%, #ffcc00 60%, #ff9900 100%);
     border: 3px solid #000;
     border-radius: 50%;
@@ -245,19 +245,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
   }
 
   /* === 버튼: Win95 정확한 스타일 === */
   .btn-area {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   #spinBtn {
-    padding: 6px 40px;
-    font-size: 1.4rem;
+    padding: 4px 32px;
+    font-size: 1.2rem;
     font-family: 'Do Hyeon', sans-serif;
     font-weight: normal;
     border: 2px solid;
@@ -280,10 +280,10 @@
 
   /* === 결과 박스: 노인 포토샵 MAX === */
   .result-box {
-    margin: 10px 0;
-    padding: 12px;
+    margin: 6px 0;
+    padding: 8px;
     text-align: center;
-    min-height: 70px;
+    min-height: 55px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -304,7 +304,7 @@
 
   .result-name {
     font-family: 'Do Hyeon', 'Impact', sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: #ff0000;
     text-shadow: 2px 2px 0px #ffcc00, 3px 3px 0px #000;
     letter-spacing: 2px;
@@ -312,9 +312,9 @@
 
   .result-category {
     font-family: 'Poor Story', cursive;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: #0000ff;
-    margin-top: 2px;
+    margin-top: 1px;
   }
 
   /* 꾸미기: 테두리 데코 */
@@ -332,7 +332,7 @@
 
   /* === 히스토리 === */
   .history {
-    margin: 8px 0;
+    margin: 4px 0;
     font-family: 'Gaegu', cursive;
     font-size: 13px;
     text-align: center;
@@ -353,8 +353,8 @@
   /* === 하단 장식 === */
   .deco-bottom {
     text-align: center;
-    margin-top: 8px;
-    padding-top: 6px;
+    margin-top: 4px;
+    padding-top: 4px;
     border-top: 1px dashed #ccc;
   }
 
@@ -424,7 +424,7 @@
   /* 구분선도 엉망 */
   .ugly-hr {
     border: none;
-    height: 3px;
+    height: 2px;
     background: repeating-linear-gradient(90deg, #ff0000 0px, #ff0000 8px, #ffff00 8px, #ffff00 16px, #00ff00 16px, #00ff00 24px, #0000ff 24px, #0000ff 32px);
     margin: 8px 0;
   }
@@ -457,7 +457,7 @@
 
   /* === 하단 서명 === */
   .footer {
-    margin: 6px auto 20px;
+    margin: 4px auto 10px;
     font-family: 'Tahoma', sans-serif;
     font-size: 10px;
     color: #808080;
@@ -496,7 +496,7 @@
         <div class="emoji-deco" style="bottom:40px;left:10px;font-size:16px;">🎉</div>
         <div class="emoji-deco" style="bottom:40px;right:10px;font-size:16px;">🎊</div>
 
-        <h1>콘마팀<br>점심 룰렛</h1>
+        <h1>콘마팀 점심 룰렛</h1>
 
         <p class="subtitle">
           <span class="star">★</span>
@@ -518,8 +518,8 @@
 
         <div class="wheel-container">
           <div class="pointer" id="pointer">▼</div>
-          <canvas id="wheel" width="400" height="400"></canvas>
-          <div class="center-circle">🍖</div>
+          <canvas id="wheel" width="320" height="320"></canvas>
+          <div class="center-circle">🍚</div>
         </div>
 
         <div class="btn-area">
