@@ -5,330 +5,141 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>콘마팀 점심 룰렛</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Jua&family=Poor+Story&family=Gaegu:wght@400;700&family=Hi+Melody&family=Do+Hyeon&display=swap');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Jua', 'Comic Sans MS', 'Chalkboard SE', cursive;
-    background: #c0c0c0;
+    font-family: 'Jua', sans-serif;
+    background: #008080;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    image-rendering: pixelated;
   }
 
-  /* === 윈도우 타이틀바 === */
+  /* ========================================
+     윈도우95 프레임 - PIXEL PERFECT
+     ======================================== */
   .window {
-    margin-top: 20px;
-    border: 3px solid #000;
-    background: #fff;
-    box-shadow: 5px 5px 0px #000;
-    max-width: 700px;
+    margin: 20px auto;
+    border: 2px solid;
+    border-color: #dfdfdf #000 #000 #dfdfdf;
+    background: #c0c0c0;
+    max-width: 680px;
     width: 95%;
-    transform: rotate(0.15deg);
-    margin-left: 3px;
+    box-shadow: 1px 1px 0 #000;
+  }
+
+  .window-inner {
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
   }
 
   .title-bar {
     background: linear-gradient(90deg, #000080, #1084d0);
     color: white;
-    padding: 4px 8px 3px 14px;
-    font-size: 14px;
+    padding: 2px 3px;
+    font-size: 12px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Tahoma', sans-serif;
+    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+    height: 20px;
+    user-select: none;
   }
 
   .title-bar-buttons {
     display: flex;
     gap: 2px;
-    margin-top: 2px;
   }
 
-  .title-bar-buttons span:nth-child(1) {
-    display: inline-block;
+  .title-bar-buttons span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 16px;
     height: 14px;
     background: #c0c0c0;
-    border: 1px outset #fff;
-    text-align: center;
-    font-size: 10px;
-    line-height: 13px;
-    cursor: pointer;
-    font-family: 'Tahoma', sans-serif;
-  }
-
-  .title-bar-buttons span:nth-child(2) {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    background: #c0c0c0;
-    border: 1px outset #fff;
-    text-align: center;
-    font-size: 11px;
-    line-height: 14px;
-    cursor: pointer;
-    font-family: 'Tahoma', sans-serif;
-    margin-top: -1px;
-  }
-
-  .title-bar-buttons span:nth-child(3) {
-    display: inline-block;
-    width: 17px;
-    height: 13px;
-    background: #c0c0c0;
-    border: 1px outset #fff;
-    text-align: center;
-    font-size: 10px;
-    line-height: 12px;
-    cursor: pointer;
-    font-family: 'Arial', sans-serif;
-    margin-top: 1px;
-  }
-
-  .window-body {
-    padding: 15px;
-    background: #fff;
-  }
-
-  /* === 메인 제목 === */
-  h1 {
-    font-size: 2.8rem;
-    color: #ff0000;
-    text-shadow: 3px 3px 0px #ffff00, -2px -2px 0px #0000ff;
-    text-align: center;
-    margin-bottom: 4px;
-    letter-spacing: -2px;
-    transform: rotate(-0.4deg);
-    margin-left: -5px;
-  }
-
-  .subtitle {
-    font-size: 1.3rem;
-    color: #ff00ff;
-    text-align: center;
-    margin-bottom: 15px;
-    font-style: italic;
-    text-shadow: 1px 1px 0px #00ff00;
-    transform: rotate(0.3deg);
-    margin-right: -4px;
-  }
-
-  /* === 마키 텍스트 === */
-  .marquee-container {
-    background: #000;
-    color: #00ff00;
-    padding: 4px 0;
-    font-size: 13px;
-    overflow: hidden;
-    white-space: nowrap;
-    border: 2px inset #808080;
-    margin-bottom: 12px;
-    transform: rotate(-0.2deg);
-    margin-left: 2px;
-    margin-right: -1px;
-  }
-
-  .marquee-text {
-    display: inline-block;
-    animation: marquee 20s linear infinite;
-  }
-
-  @keyframes marquee {
-    from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
-  }
-
-  /* === 룰렛 영역 === */
-  .wheel-container {
-    position: relative;
-    width: 400px;
-    height: 400px;
-    margin: 0 auto 15px;
-    margin-left: calc(50% - 203px);
-    transform: rotate(0.25deg);
-  }
-
-  canvas {
-    border-radius: 50%;
-    border: 6px dashed #ff0000;
-    image-rendering: pixelated;
-  }
-
-  .pointer {
-    position: absolute;
-    top: -22px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px;
-    z-index: 10;
-    filter: drop-shadow(2px 2px 0px #000);
+    border: 2px solid;
+    border-color: #dfdfdf #000 #000 #dfdfdf;
+    font-size: 8px;
     line-height: 1;
-  }
-
-  .center-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70px;
-    height: 70px;
-    background: #ffff00;
-    border: 4px solid #000;
-    border-radius: 50%;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-  }
-
-  /* === Win95 버튼 === */
-  #spinBtn {
-    padding: 12px 50px 12px 48px;
-    font-size: 1.6rem;
-    font-family: 'Jua', 'Comic Sans MS', cursive;
-    font-weight: bold;
-    border: 3px outset #fff;
-    background: #c0c0c0;
-    color: #000;
     cursor: pointer;
-    display: block;
-    margin: 0 auto;
-    margin-left: calc(50% - 82px);
-    text-shadow: none;
-    box-shadow: 2px 2px 0px #000;
-    letter-spacing: 3px;
-    transform: rotate(0.35deg);
-  }
-
-  #spinBtn:active {
-    border-style: inset;
-    box-shadow: none;
-    transform: translate(2px, 2px);
-  }
-
-  #spinBtn:disabled {
-    color: #808080;
-  }
-
-  #spinBtn:hover:not(:disabled) {
-    background: #d4d4d4;
-  }
-
-  /* === 결과 박스 === */
-  .result-box {
-    margin: 15px auto 10px;
-    margin-left: 4px;
-    padding: 15px 30px 16px 31px;
-    background: #ffff00;
-    border: 4px solid #ff0000;
-    border-width: 4px 4px 4px 3px;
-    text-align: center;
-    box-shadow: 4px 4px 0px #000;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transform: rotate(-0.3deg);
-  }
-
-  .result-box.active {
-    animation: blink-border 0.3s ease 3;
-  }
-
-  @keyframes blink-border {
-    0%, 100% { border-color: #ff0000; background: #ffff00; }
-    50% { border-color: #0000ff; background: #00ff00; }
-  }
-
-  .result-name {
-    font-size: 2.4rem;
-    font-weight: bold;
-    color: #ff0000;
-    text-shadow: 2px 2px 0px #000;
-  }
-
-  .result-category {
-    font-size: 1.1rem;
-    color: #0000ff;
+    font-family: 'Tahoma', sans-serif;
     font-weight: bold;
   }
 
-  /* === 히스토리 === */
-  .history {
-    margin: 10px auto;
-    font-size: 0.85rem;
-    max-width: 600px;
-    text-align: center;
-    padding-left: 3px;
-    color: #000;
-    transform: rotate(0.15deg);
+  .title-bar-buttons span:active {
+    border-color: #000 #dfdfdf #dfdfdf #000;
   }
 
-  .history span {
-    display: inline-block;
-    padding: 2px 8px;
-    margin: 2px;
+  /* === 메뉴바 === */
+  .menu-bar {
     background: #c0c0c0;
-    border: 2px outset #fff;
-    font-size: 12px;
-    font-family: 'Tahoma', sans-serif;
-  }
-
-  /* === 카운터 === */
-  .count-badge {
-    font-size: 0.9rem;
-    color: #000080;
-    margin-bottom: 20px;
-    text-align: center;
-    padding-left: 6px;
-    font-family: 'Tahoma', sans-serif;
-    transform: rotate(0.15deg);
-  }
-
-  /* === 못그린 클립아트들 === */
-  .doodle {
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* === 하단 서명 === */
-  .footer {
-    margin: 10px auto 20px;
+    padding: 1px 0;
+    border-bottom: 1px solid #808080;
     font-size: 11px;
-    color: #808080;
-    text-align: center;
     font-family: 'Tahoma', sans-serif;
   }
 
-  .footer a { color: #0000ff; }
+  .menu-bar span {
+    padding: 1px 6px;
+    cursor: pointer;
+  }
 
-  /* === 워드아트 효과 === */
-  .wordart {
-    background: linear-gradient(180deg, #ff0000 0%, #ff8800 25%, #ffff00 50%, #00ff00 75%, #0000ff 100%);
+  .menu-bar span:hover {
+    background: #000080;
+    color: #fff;
+  }
+
+  /* === 윈도우 바디 === */
+  .window-body {
+    padding: 12px;
+    background: #c0c0c0;
+  }
+
+  /* === 컨텐츠 영역 (안쪽 움푹 패인 느낌) === */
+  .content-area {
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    background: #ffffff;
+    padding: 15px;
+  }
+
+  /* ========================================
+     안의 콘텐츠 - 노인 포토샵 감성
+     ======================================== */
+
+  /* 제목: 워드아트 + 그림자 떡칠 */
+  h1 {
+    font-family: 'Do Hyeon', 'Impact', sans-serif;
+    font-size: 2.6rem;
+    text-align: center;
+    margin-bottom: 6px;
+    background: linear-gradient(180deg, #ff0000 0%, #ff6600 30%, #ffcc00 50%, #ff6600 70%, #ff0000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-size: 1rem;
-    font-weight: bold;
-    text-align: center;
-    padding-left: 8px;
-    margin-bottom: 8px;
-    transform: scaleY(1.3) rotate(0.2deg);
+    filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #880000);
+    line-height: 1.2;
   }
 
-  /* === 깜빡이는 별 === */
-  .blink-star {
-    animation: blink 0.8s step-end infinite;
-    font-size: 1.2rem;
+  /* 부제: 다른 폰트 + 다른 색 */
+  .subtitle {
+    font-family: 'Hi Melody', cursive;
+    font-size: 1.5rem;
+    color: #ff00ff;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .subtitle .star {
+    color: #ffcc00;
+    font-size: 1.8rem;
+    animation: blink 0.7s step-end infinite;
   }
 
   @keyframes blink {
@@ -336,41 +147,235 @@
     50% { opacity: 0; }
   }
 
-  /* === 상태바 === */
-  .status-bar {
-    background: #c0c0c0;
-    border-top: 1px solid #808080;
-    padding: 3px 8px 5px 12px;
-    font-size: 11px;
-    font-family: 'Tahoma', sans-serif;
-    color: #000;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .status-bar div:first-child {
-    border: 1px inset #fff;
-    padding: 1px 6px;
-    font-size: 10px;
-  }
-
-  .status-bar div:last-child {
-    border: 1px inset #fff;
-    padding: 2px 9px;
-    font-size: 12px;
-  }
-
-  /* visitor counter */
-  .visitor-counter {
-    margin: 5px auto;
-    margin-right: 3px;
+  /* 건물 안내: 또 다른 폰트 + 레인보우 */
+  .location-info {
     text-align: center;
-    padding-left: 4px;
-    transform: rotate(0.25deg);
+    font-family: 'Gaegu', cursive;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff0000);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow-slide 3s linear infinite;
   }
 
-  .visitor-counter img {
-    image-rendering: pixelated;
+  @keyframes rainbow-slide {
+    from { background-position: 0% 50%; }
+    to { background-position: 200% 50%; }
+  }
+
+  /* 마키: 90년대 감성 */
+  .marquee-container {
+    background: #000080;
+    color: #ffff00;
+    padding: 3px 0;
+    font-family: 'Poor Story', cursive;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+  }
+
+  .marquee-text {
+    display: inline-block;
+    animation: marquee 18s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* 식당 카운트: 또또 다른 폰트 */
+  .count-badge {
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    color: #808080;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .count-badge strong {
+    color: #ff0000;
+    font-size: 14px;
+    font-family: 'Impact', sans-serif;
+  }
+
+  /* === 룰렛 === */
+  .wheel-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 12px;
+  }
+
+  canvas {
+    border-radius: 50%;
+    border: 5px solid #000;
+    box-shadow: 3px 3px 0px #808080;
+  }
+
+  .pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
+    z-index: 10;
+    filter: drop-shadow(1px 1px 0px #000);
+    line-height: 1;
+    color: #ff0000;
+  }
+
+  .center-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    background: radial-gradient(circle, #ffff00 0%, #ffcc00 60%, #ff9900 100%);
+    border: 3px solid #000;
+    border-radius: 50%;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+  }
+
+  /* === 버튼: Win95 정확한 스타일 === */
+  .btn-area {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  #spinBtn {
+    padding: 6px 40px;
+    font-size: 1.4rem;
+    font-family: 'Do Hyeon', sans-serif;
+    font-weight: normal;
+    border: 2px solid;
+    border-color: #dfdfdf #000 #000 #dfdfdf;
+    background: #c0c0c0;
+    color: #000;
+    cursor: pointer;
+    letter-spacing: 2px;
+  }
+
+  #spinBtn:active {
+    border-color: #000 #dfdfdf #dfdfdf #000;
+    padding: 7px 39px 5px 41px;
+  }
+
+  #spinBtn:disabled {
+    color: #808080;
+    text-shadow: 1px 1px 0 #fff;
+  }
+
+  /* === 결과 박스: 노인 포토샵 MAX === */
+  .result-box {
+    margin: 10px 0;
+    padding: 12px;
+    text-align: center;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #ffffcc, #ffff00, #ffcc00);
+    border: 3px double #ff0000;
+    position: relative;
+  }
+
+  .result-box.active {
+    animation: blink-bg 0.25s ease 4;
+  }
+
+  @keyframes blink-bg {
+    0%, 100% { background: linear-gradient(180deg, #ffffcc, #ffff00, #ffcc00); }
+    50% { background: linear-gradient(180deg, #ccffcc, #00ff00, #00cc00); }
+  }
+
+  .result-name {
+    font-family: 'Do Hyeon', 'Impact', sans-serif;
+    font-size: 2.2rem;
+    color: #ff0000;
+    text-shadow: 2px 2px 0px #ffcc00, 3px 3px 0px #000;
+    letter-spacing: 2px;
+  }
+
+  .result-category {
+    font-family: 'Poor Story', cursive;
+    font-size: 1.1rem;
+    color: #0000ff;
+    margin-top: 2px;
+  }
+
+  /* 꾸미기: 테두리 데코 */
+  .result-box::before {
+    content: "🍜🍖🍣🍕🍛🥘🍝🥩";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    letter-spacing: 4px;
+    background: #fff;
+    padding: 0 6px;
+  }
+
+  /* === 히스토리 === */
+  .history {
+    margin: 8px 0;
+    font-family: 'Gaegu', cursive;
+    font-size: 13px;
+    text-align: center;
+    color: #808080;
+  }
+
+  .history span {
+    display: inline-block;
+    padding: 1px 6px;
+    margin: 1px;
+    background: #e8e8e8;
+    border: 1px solid #808080;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+    color: #000;
+  }
+
+  /* === 하단 장식 === */
+  .deco-bottom {
+    text-align: center;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed #ccc;
+  }
+
+  .under-construction {
+    font-family: 'Comic Sans MS', 'Poor Story', cursive;
+    font-size: 11px;
+    color: #ff0000;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .visitor-counter {
+    margin: 4px 0;
+    text-align: center;
+  }
+
+  .visitor-label {
+    font-family: 'Gaegu', cursive;
+    font-size: 13px;
+    color: #808080;
   }
 
   .counter-box {
@@ -378,18 +383,22 @@
     background: #000;
     color: #00ff00;
     font-family: 'Courier New', monospace;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
-    padding: 2px 8px;
-    border: 2px inset #808080;
-    letter-spacing: 3px;
+    padding: 1px 6px;
+    border: 1px inset #808080;
+    letter-spacing: 2px;
   }
 
-  .rainbow-text {
-    animation: rainbow 2s linear infinite;
+  .ie-notice {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 10px;
+    color: #ff00ff;
+    text-align: center;
+    animation: rainbow-color 2s linear infinite;
   }
 
-  @keyframes rainbow {
+  @keyframes rainbow-color {
     0% { color: #ff0000; }
     16% { color: #ff8800; }
     33% { color: #ffff00; }
@@ -399,97 +408,158 @@
     100% { color: #ff0000; }
   }
 
-  .under-construction {
-    font-size: 12px;
-    color: #ff0000;
+  /* 랜덤 이모지 장식 - absolute positioned */
+  .emoji-deco {
+    position: absolute;
+    pointer-events: none;
+    font-size: 20px;
+    opacity: 0.7;
+  }
+
+  .content-area {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 구분선도 엉망 */
+  .ugly-hr {
+    border: none;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, #ff0000 0px, #ff0000 8px, #ffff00 8px, #ffff00 16px, #00ff00 16px, #00ff00 24px, #0000ff 24px, #0000ff 32px);
+    margin: 8px 0;
+  }
+
+  /* === 상태바 - Win95 정확 === */
+  .status-bar {
+    background: #c0c0c0;
+    border-top: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 2px 4px;
+    font-size: 11px;
+    font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+    color: #000;
+    display: flex;
+    gap: 2px;
+  }
+
+  .status-bar div {
+    border: 1px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 1px 4px;
+    flex: 1;
+  }
+
+  .status-bar div:last-child {
+    flex: none;
+    width: 80px;
     text-align: center;
-    padding-right: 5px;
-    font-weight: bold;
-    margin: 5px 0;
-    font-family: 'Comic Sans MS', cursive;
-    transform: rotate(-0.2deg);
   }
 
-  .sparkle {
-    animation: sparkle 1.5s ease-in-out infinite;
-  }
-
-  @keyframes sparkle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
+  /* === 하단 서명 === */
+  .footer {
+    margin: 6px auto 20px;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 10px;
+    color: #808080;
+    text-align: center;
   }
 </style>
 </head>
 <body>
 
 <div class="window">
-  <div class="title-bar">
-    <span>콘마팀_점심_룰렛.exe</span>
-    <div class="title-bar-buttons">
-      <span>_</span>
-      <span>□</span>
-      <span>X</span>
-    </div>
-  </div>
-  <div class="window-body">
-
-    <h1>콘마팀 점심 룰렛</h1>
-    <p class="subtitle">
-      <span class="blink-star">★</span>
-      룰렛이 정해 드릴게요
-      <span class="blink-star">★</span>
-    </p>
-
-    <div class="wordart">~ 판교 유스페이스 / H스퀘어 / 엔바이콘 / 삼환하이펙스 ~</div>
-
-    <div class="marquee-container">
-      <span class="marquee-text">
-        ★★★ 오늘 점심 뭐 먹을지 고민하지 마세요!! 룰렛이 알아서 정해드립니다!! 이의제기 불가!! ★★★ 돌리면 무조건 그 식당 갑니다 ★★★ NO 컴플레인 ★★★
-      </span>
+  <div class="window-inner">
+    <div class="title-bar">
+      <span>콘마팀_점심_룰렛.exe</span>
+      <div class="title-bar-buttons">
+        <span>_</span>
+        <span>□</span>
+        <span>X</span>
+      </div>
     </div>
 
-    <p class="count-badge">등록된 식당: <strong id="countDisplay">0</strong>개 (판교테크노밸리 일대)</p>
-
-    <div class="wheel-container">
-      <div class="pointer" id="pointer">▼</div>
-      <canvas id="wheel" width="400" height="400"></canvas>
-      <div class="center-circle">🍖</div>
+    <div class="menu-bar">
+      <span><u>파</u>일(F)</span>
+      <span><u>편</u>집(E)</span>
+      <span><u>보</u>기(V)</span>
+      <span><u>도</u>움말(H)</span>
     </div>
 
-    <button id="spinBtn" onclick="spin()">▶ 돌 려 ! ◀</button>
+    <div class="window-body">
+      <div class="content-area">
 
-    <div class="result-box" id="resultBox">
-      <div class="result-name" id="resultName">버튼 누르세요!!</div>
-      <div class="result-category" id="resultCategory"></div>
+        <!-- 랜덤 이모지 장식들 (노인 포토샵은 빈공간을 못참음) -->
+        <div class="emoji-deco" style="top:5px;left:8px;">🍚</div>
+        <div class="emoji-deco" style="top:5px;right:8px;">🥢</div>
+        <div class="emoji-deco" style="top:60px;left:5px;font-size:16px;">✨</div>
+        <div class="emoji-deco" style="top:60px;right:5px;font-size:16px;">✨</div>
+        <div class="emoji-deco" style="bottom:40px;left:10px;font-size:16px;">🎉</div>
+        <div class="emoji-deco" style="bottom:40px;right:10px;font-size:16px;">🎊</div>
+
+        <h1>콘마팀<br>점심 룰렛</h1>
+
+        <p class="subtitle">
+          <span class="star">★</span>
+          룰렛이 정해 드릴게요
+          <span class="star">★</span>
+        </p>
+
+        <div class="ugly-hr"></div>
+
+        <div class="location-info">~ 판교 유스페이스 / H스퀘어 / 엔바이콘 / 삼환하이펙스 ~</div>
+
+        <div class="marquee-container">
+          <span class="marquee-text">
+            ★★★ 오늘 점심 뭐 먹을지 고민하지 마세요!! 룰렛이 알아서 정해드립니다!! 이의제기 불가!! ★★★ 돌리면 무조건 그 식당 갑니다 ★★★ NO 컴플레인 ★★★
+          </span>
+        </div>
+
+        <p class="count-badge">등록된 식당: <strong id="countDisplay">0</strong>개 (판교테크노밸리 일대)</p>
+
+        <div class="wheel-container">
+          <div class="pointer" id="pointer">▼</div>
+          <canvas id="wheel" width="400" height="400"></canvas>
+          <div class="center-circle">🍖</div>
+        </div>
+
+        <div class="btn-area">
+          <button id="spinBtn" onclick="spin()">▶ 돌 려 ! ◀</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+          <div class="result-name" id="resultName">버튼 누르세요!!</div>
+          <div class="result-category" id="resultCategory"></div>
+        </div>
+
+        <div class="history" id="history"></div>
+
+        <div class="ugly-hr"></div>
+
+        <div class="deco-bottom">
+          <div class="under-construction">
+            🚧 UNDER CONSTRUCTION 🚧
+          </div>
+          <div class="visitor-counter">
+            <span class="visitor-label">방문자 수: </span>
+            <span class="counter-box" id="visitorCount">000000</span>
+          </div>
+          <div class="ie-notice">Best viewed in Internet Explorer 6.0</div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="history" id="history"></div>
-
-    <div class="under-construction">
-      🚧 UNDER CONSTRUCTION 🚧
+    <div class="status-bar">
+      <div id="statusText">준비 완료</div>
+      <div id="statusTime"></div>
     </div>
-
-    <div class="visitor-counter">
-      <span style="font-size:11px; font-family: 'Tahoma',sans-serif;">방문자 수: </span>
-      <span class="counter-box" id="visitorCount">000000</span>
-    </div>
-
-  </div>
-
-  <div class="status-bar">
-    <div id="statusText">준비 완료</div>
-    <div id="statusTime"></div>
   </div>
 </div>
 
-<p class="footer">
-  Powered by 그림판 & 콘마팀<br>
-  <span class="rainbow-text">Best viewed in Internet Explorer 6.0</span>
-</p>
+<p class="footer">Powered by 그림판 & 콘마팀</p>
 
 <script>
 const RESTAURANTS = [
-  // ===== 한식 =====
   { name: "앞구정김치찌개", category: "김치찌개" },
   { name: "북청집", category: "제육볶음" },
   { name: "오봉집 유스페이스점", category: "닭볶음/보쌈" },
@@ -517,8 +587,6 @@ const RESTAURANTS = [
   { name: "조마루감자탕 판교점", category: "감자탕" },
   { name: "원조감자탕일미집", category: "감자탕/보쌈" },
   { name: "춘업순댓국", category: "순대국" },
-
-  // ===== 고기 =====
   { name: "황제갈비", category: "소고기/토시살" },
   { name: "풍천숯불재벌장어", category: "장어구이" },
   { name: "조재벌식당", category: "삼겹살" },
@@ -531,8 +599,6 @@ const RESTAURANTS = [
   { name: "사위식당", category: "낙곱새" },
   { name: "통큰낙지", category: "낙지볶음" },
   { name: "목포명가 판교점", category: "홍어/횟집" },
-
-  // ===== 일식 =====
   { name: "하루", category: "소바/덴푸라" },
   { name: "일상화식", category: "카이센동" },
   { name: "이황식당", category: "돈코츠라멘" },
@@ -550,8 +616,6 @@ const RESTAURANTS = [
   { name: "예술작품을빚다비즈", category: "돈까스" },
   { name: "규카츠정 판교점", category: "규카츠/카레" },
   { name: "해도룩", category: "연어덮밥/세꼬시" },
-
-  // ===== 중식 =====
   { name: "팔복", category: "중식/동파육" },
   { name: "중경별곡", category: "마라탕/마라샹궈" },
   { name: "이가네양꼬치", category: "양꼬치/양갈비" },
@@ -562,8 +626,6 @@ const RESTAURANTS = [
   { name: "신라마라탕", category: "마라탕" },
   { name: "락앤윱", category: "짜장면" },
   { name: "동청담", category: "중식" },
-
-  // ===== 양식 =====
   { name: "빈티지1988", category: "파스타/스테이크" },
   { name: "데이빗앤돌스", category: "브런치/샐러드" },
   { name: "바스버거 판교점", category: "수제버거" },
@@ -572,8 +634,6 @@ const RESTAURANTS = [
   { name: "헤비스테이크 판교점", category: "스테이크" },
   { name: "울프스덴", category: "파스타/스테이크" },
   { name: "라디오베이", category: "파스타" },
-
-  // ===== 아시안 =====
   { name: "홍호아 판교점", category: "베트남/반미" },
   { name: "슈퍼타이 판교점", category: "태국음식" },
   { name: "르메콩", category: "베트남 쌀국수" },
@@ -581,8 +641,6 @@ const RESTAURANTS = [
   { name: "킨파", category: "연어/포케" },
   { name: "마마스포", category: "태국음식" },
   { name: "오한수 우육면가", category: "우육면" },
-
-  // ===== 분식/간편 =====
   { name: "김밥만 유스페이스점", category: "김밥" },
   { name: "디셋테이블", category: "키토김밥" },
   { name: "김가네 H스퀘어점", category: "김밥" },
@@ -591,8 +649,6 @@ const RESTAURANTS = [
   { name: "슬로우캐리 판교점", category: "샐러드/포케" },
   { name: "프레퍼스 다이어트푸드", category: "샐러드" },
   { name: "하나샤브샤브", category: "샤브샤브" },
-
-  // ===== 술집/바 =====
   { name: "아침산저녁바다", category: "술집" },
   { name: "을지로왕노가리", category: "맥주/노가리" },
   { name: "해질녘", category: "요리주점" },
@@ -608,7 +664,6 @@ const RESTAURANTS = [
   { name: "비샬", category: "와인바" },
 ];
 
-// --- State ---
 let spinning = false;
 let currentAngle = 0;
 let history = [];
@@ -616,7 +671,6 @@ const n = RESTAURANTS.length;
 
 document.getElementById("countDisplay").textContent = n;
 
-// --- Ugly bright colors ---
 const COLORS = [
   "#FF0000","#00FF00","#0000FF","#FFFF00","#FF00FF","#00FFFF",
   "#FF8800","#88FF00","#0088FF","#FF0088","#8800FF","#00FF88",
@@ -639,26 +693,21 @@ function drawWheel() {
     const startAngle = currentAngle + i * arc;
     const endAngle = startAngle + arc;
 
-    // slice
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.arc(cx, cy, r, startAngle, endAngle);
     ctx.closePath();
     ctx.fillStyle = COLORS[i % COLORS.length];
     ctx.fill();
-
-    // thick black border
     ctx.strokeStyle = "#000";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
     ctx.stroke();
 
-    // text
     ctx.save();
     ctx.translate(cx, cy);
     ctx.rotate(startAngle + arc / 2);
-
     ctx.fillStyle = "#000";
-    ctx.font = "bold 8px 'Comic Sans MS', 'Jua', cursive";
+    ctx.font = "bold 8px 'Malgun Gothic', sans-serif";
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
     ctx.strokeStyle = "#fff";
@@ -672,15 +721,6 @@ function drawWheel() {
     ctx.fillText(label, r - 12, 0);
     ctx.restore();
   }
-
-  // outer ring (ugly dashed)
-  ctx.beginPath();
-  ctx.arc(cx, cy, r + 2, 0, 2 * Math.PI);
-  ctx.strokeStyle = "#000";
-  ctx.lineWidth = 4;
-  ctx.setLineDash([8, 4]);
-  ctx.stroke();
-  ctx.setLineDash([]);
 }
 
 function getWinnerIndex() {
@@ -692,29 +732,22 @@ function getWinnerIndex() {
 
 function spin() {
   if (spinning || n === 0) return;
-
   spinning = true;
   document.getElementById("spinBtn").disabled = true;
   document.getElementById("resultBox").classList.remove("active");
   document.getElementById("statusText").textContent = "룰렛 돌리는 중...";
 
-  const extraRotations = (5 + Math.random() * 5) * 2 * Math.PI;
-  const randomOffset = Math.random() * 2 * Math.PI;
-  const totalSpin = extraRotations + randomOffset;
+  const totalSpin = (5 + Math.random() * 5) * 2 * Math.PI + Math.random() * 2 * Math.PI;
   const duration = 4000 + Math.random() * 1500;
   const startAngle = currentAngle;
   const startTime = performance.now();
 
-  function easeOut(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
   function animate(now) {
-    const elapsed = now - startTime;
-    const t = Math.min(elapsed / duration, 1);
+    const t = Math.min((now - startTime) / duration, 1);
     currentAngle = startAngle + totalSpin * easeOut(t);
     drawWheel();
-
     if (t < 1) {
       requestAnimationFrame(animate);
     } else {
@@ -723,20 +756,16 @@ function spin() {
       showResult();
     }
   }
-
   requestAnimationFrame(animate);
 }
 
 function showResult() {
   const idx = getWinnerIndex();
   const winner = RESTAURANTS[idx];
-
   document.getElementById("resultName").textContent = ">>> " + winner.name + " <<<";
   document.getElementById("resultCategory").textContent = "[ " + winner.category + " ]";
   document.getElementById("resultBox").classList.add("active");
   document.getElementById("statusText").textContent = "결과: " + winner.name;
-
-  // ugly alert-style confetti
   createUglyConfetti();
 
   history.unshift(winner.name);
@@ -748,60 +777,35 @@ function showResult() {
 }
 
 function createUglyConfetti() {
-  const ugly = ["★","●","■","▲","♥","♦","♣","♠","◆","✦","☆","○"];
+  const ugly = ["★","●","■","▲","♥","♦","♣","♠","◆","✦","☆","○","🍖","🍜","🍣","🍕"];
   for (let i = 0; i < 30; i++) {
     const el = document.createElement("div");
-    const char = ugly[Math.floor(Math.random() * ugly.length)];
-    el.textContent = char;
-    el.style.cssText = `
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      font-size: ${12 + Math.random() * 24}px;
-      color: ${COLORS[Math.floor(Math.random() * COLORS.length)]};
-      pointer-events: none;
-      z-index: 9999;
-      font-weight: bold;
-    `;
+    el.textContent = ugly[Math.floor(Math.random() * ugly.length)];
+    el.style.cssText = `position:fixed;top:50%;left:50%;font-size:${12+Math.random()*24}px;color:${COLORS[Math.floor(Math.random()*COLORS.length)]};pointer-events:none;z-index:9999;`;
     document.body.appendChild(el);
-
     const angle = Math.random() * Math.PI * 2;
-    const velocity = 150 + Math.random() * 350;
-    const vx = Math.cos(angle) * velocity;
-    const vy = Math.sin(angle) * velocity - 150;
-
+    const v = 150 + Math.random() * 350;
     el.animate([
-      { transform: "translate(0, 0) rotate(0deg)", opacity: 1 },
-      { transform: `translate(${vx}px, ${vy + 500}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
-    ], {
-      duration: 1200 + Math.random() * 800,
-      easing: "ease-out"
-    }).onfinish = () => el.remove();
+      { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
+      { transform: `translate(${Math.cos(angle)*v}px,${Math.sin(angle)*v-150+500}px) rotate(${Math.random()*720}deg)`, opacity: 0 }
+    ], { duration: 1200+Math.random()*800, easing: "ease-out" }).onfinish = () => el.remove();
   }
 }
 
-// --- Keyboard shortcut ---
 document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" || e.code === "Enter") {
-    e.preventDefault();
-    spin();
-  }
+  if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); spin(); }
 });
 
-// --- Status bar clock ---
 function updateClock() {
-  const now = new Date();
   document.getElementById("statusTime").textContent =
-    now.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+    new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// --- Fake visitor counter ---
-const fakeCount = Math.floor(Math.random() * 900000 + 100000);
-document.getElementById("visitorCount").textContent = String(fakeCount).padStart(6, "0");
+document.getElementById("visitorCount").textContent =
+  String(Math.floor(Math.random() * 900000 + 100000)).padStart(6, "0");
 
-// --- Init ---
 drawWheel();
 </script>
 </body>
