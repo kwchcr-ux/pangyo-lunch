@@ -362,11 +362,34 @@
     letter-spacing: 2px;
   }
 
+  .result-name a {
+    color: #ff0000;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    cursor: pointer;
+  }
+
+  .result-name a:hover {
+    color: #ff6600;
+    text-shadow: 2px 2px 0px #ffff00, 3px 3px 0px #000;
+  }
+
   .result-category {
     font-family: 'Poor Story', cursive;
     font-size: 0.9rem;
     color: #0000ff;
     margin-top: 1px;
+  }
+
+  .history a {
+    text-decoration: none;
+  }
+  .history a span {
+    cursor: pointer;
+  }
+  .history a:hover span {
+    background: #ffff00;
+    border-color: #ff0000;
   }
 
   /* 꾸미기: 테두리 데코 */
@@ -897,11 +920,18 @@ function spin() {
   requestAnimationFrame(animate);
 }
 
+function naverMapUrl(name) {
+  // "판교" 키워드를 함께 검색해서 정확도 향상
+  return "https://map.naver.com/p/search/" + encodeURIComponent(name + " 판교");
+}
+
 function showResult() {
   const idx = getWinnerIndex();
   const winner = RESTAURANTS[idx];
-  document.getElementById("resultName").textContent = ">>> " + winner.name + " <<<";
-  document.getElementById("resultCategory").textContent = "[ " + winner.category + " ]";
+  const nameEl = document.getElementById("resultName");
+  // 링크로 렌더 — 네이버 지도 검색 페이지 새탭 열기
+  nameEl.innerHTML = `>>> <a href="${naverMapUrl(winner.name)}" target="_blank" rel="noopener">${winner.name}</a> <<<`;
+  document.getElementById("resultCategory").textContent = "[ " + winner.category + " ] 👉 클릭해서 네이버 지도 보기";
   document.getElementById("resultBox").classList.add("active");
   document.getElementById("statusText").textContent = "결과: " + winner.name;
   createUglyConfetti();
@@ -910,7 +940,9 @@ function showResult() {
   if (history.length > 6) history.pop();
   const historyEl = document.getElementById("history");
   historyEl.innerHTML = history.length > 1
-    ? "이전 결과: " + history.slice(1).map(h => `<span>${h}</span>`).join("")
+    ? "이전 결과: " + history.slice(1).map(h =>
+        `<a href="${naverMapUrl(h)}" target="_blank" rel="noopener"><span>${h}</span></a>`
+      ).join("")
     : "";
 }
 
